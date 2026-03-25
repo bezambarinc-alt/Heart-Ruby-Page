@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Heart Ruby — Mother's Day Special</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            color: #1a1a1a;
+            background: #ffffff;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+        a { color: inherit; text-decoration: none; }
+        img { display: block; max-width: 100%; height: auto; }
+
+        /* ===== HEADER ===== */
+        .hr-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: #ffffff;
+            border-bottom: 1px solid #e8e4de;
+            padding: 20px;
+            text-align: center;
+        }
+        .hr-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 22px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            color: #1a1a1a;
+            text-transform: uppercase;
+            text-decoration: none;
+        }
+
+        /* ===== TWO-COLUMN PRODUCT LAYOUT ===== */
+        .hr-product {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 40px;
+            min-height: 100vh;
+        }
+        .hr-images {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 752px;
+            flex-shrink: 0;
+        }
+        .hr-img-slot {
+            width: 100%;
+            aspect-ratio: 3/4;
+            overflow: hidden;
+            background: linear-gradient(135deg, #f5f1eb, #ede8df);
+        }
+        .hr-img-slot img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .hr-video-slot {
+            width: 100%;
+            aspect-ratio: 3/4;
+            overflow: hidden;
+            background: #0d0d0d;
+        }
+        .hr-video-slot video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .hr-details {
+            padding: 40px 0 60px;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            flex: 1;
+            max-width: 500px;
+        }
+        .hr-details-inner {
+            max-width: 400px;
+            width: 100%;
+        }
+        .hr-sku {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 11px;
+            color: #999;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+        .hr-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 32px;
+            font-weight: 500;
+            line-height: 1.2;
+            margin-bottom: 10px;
+            color: #1a1a1a;
+        }
+        .hr-cta-btn {
+            display: block;
+            width: 100%;
+            padding: 18px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-align: center;
+            background: #1a1a1a;
+            color: #d4af37;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s;
+            text-decoration: none;
+            margin-bottom: 12px;
+        }
+        .hr-cta-btn:hover { background: #333; }
+        .hr-cta-outline {
+            display: block;
+            width: 100%;
+            padding: 16px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-align: center;
+            background: transparent;
+            color: #1a1a1a;
+            border: 1.5px solid #1a1a1a;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            margin-bottom: 12px;
+        }
+        .hr-cta-outline:hover { background: #1a1a1a; color: #d4af37; }
+        .hr-phone-link {
+            display: block;
+            text-align: center;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12px;
+            font-weight: 500;
+            color: #999;
+            margin-top: 6px;
+            margin-bottom: 30px;
+        }
+        .hr-phone-link a {
+            color: #1a1a1a;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+        .hr-accordion { border-top: 1px solid #e8e4de; }
+        .hr-acc-item { border-bottom: 1px solid #e8e4de; }
+        .hr-acc-btn {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 0;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            color: #1a1a1a;
+        }
+        .hr-acc-btn .plus {
+            font-size: 18px;
+            font-weight: 300;
+            transition: transform 0.3s;
+        }
+        .hr-acc-btn.open .plus { transform: rotate(45deg); }
+        .hr-acc-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s ease;
+        }
+        .hr-acc-inner {
+            padding: 0 0 16px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12px;
+            color: #666;
+            line-height: 1.8;
+            text-align: center;
+        }
+
+        /* ===== VIDEO ===== */
+        .hr-video-section {
+            width: 100%;
+            background: #0d0d0d;
+        }
+        .hr-video-section video {
+            width: 100%;
+            display: block;
+        }
+
+        /* ===== FOUR-IMAGE HORIZONTAL ROW ===== */
+        .hr-four-images {
+            display: flex;
+            gap: 4px;
+            width: 100%;
+            max-width: 1270px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+        .hr-four-images .hr-thumb {
+            flex: 1;
+            aspect-ratio: 1/1;
+            overflow: hidden;
+            background: linear-gradient(135deg, #f5f1eb, #ede8df);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .hr-four-images .hr-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            cursor: pointer;
+        }
+
+        /* ===== LIGHTBOX ===== */
+        .hr-lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.92);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        .hr-lightbox.active {
+            display: flex;
+        }
+        .hr-lightbox img {
+            max-width: 90%;
+            max-height: 90vh;
+            object-fit: contain;
+            border: none;
+            box-shadow: 0 0 60px rgba(0, 0, 0, 0.5);
+        }
+        .hr-lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 28px;
+            color: #fff;
+            cursor: pointer;
+            font-weight: 300;
+            line-height: 1;
+            z-index: 10000;
+        }
+        .hr-lightbox-close:hover { color: #d4af37; }
+        .hr-lightbox-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 40px;
+            color: #fff;
+            cursor: pointer;
+            font-weight: 300;
+            font-family: 'Montserrat', sans-serif;
+            z-index: 10000;
+            padding: 20px;
+            user-select: none;
+            -webkit-user-select: none;
+            transition: color 0.2s;
+        }
+        .hr-lightbox-arrow:hover { color: #d4af37; }
+        .hr-lightbox-prev { left: 20px; }
+        .hr-lightbox-next { right: 20px; }
+        @media (max-width: 640px) {
+            .hr-four-images { padding: 0 20px; gap: 2px; }
+        }
+
+        /* ===== HERO IMAGE — Actual size, centered ===== */
+        .hr-full-img {
+            width: 100%;
+            text-align: center;
+            background: #ffffff;
+            padding: 40px 0;
+        }
+        .hr-full-img img {
+            display: inline-block;
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* ===== THREE STORIES ===== */
+        .hr-stories {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 80px 40px;
+        }
+        .hr-story {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        .hr-story:last-child { margin-bottom: 0; }
+        .hr-story-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: #d4af37;
+            margin-bottom: 12px;
+        }
+        .hr-story h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 28px;
+            font-weight: 500;
+            color: #1a1a1a;
+            margin-bottom: 14px;
+        }
+        .hr-story p {
+            font-size: 16px;
+            color: #777;
+            line-height: 1.8;
+            max-width: 520px;
+            margin: 0 auto;
+        }
+
+        /* ===== FINAL CTA ===== */
+        .hr-final-cta {
+            text-align: center;
+            padding: 20px 40px 80px;
+        }
+        .hr-final-cta .hr-cta-btn {
+            display: inline-block;
+            width: auto;
+            padding: 18px 60px;
+        }
+        .hr-final-cta .hr-cta-outline {
+            display: inline-block;
+            width: auto;
+            padding: 16px 50px;
+            margin-left: 10px;
+        }
+        .hr-final-cta p {
+            margin-top: 18px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12px;
+            color: #999;
+        }
+        .hr-final-cta p a {
+            color: #1a1a1a;
+            text-decoration: none;
+        }
+
+        /* ===== FOOTER ===== */
+        .hr-footer {
+            background: #0d0d0d;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        .hr-footer p {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 10px;
+            color: #555;
+            line-height: 2;
+        }
+        .hr-footer a { color: #777; }
+        .hr-footer-tag {
+            margin-top: 14px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 9px;
+            color: #444;
+            letter-spacing: 0.5px;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .hr-product { flex-direction: column; align-items: center; gap: 30px; padding: 20px; }
+            .hr-images { width: 100%; max-width: 400px; }
+            .hr-details { position: static; height: auto; padding: 30px 20px; max-width: 100%; }
+        }
+        @media (max-width: 640px) {
+            .hr-details { padding: 30px 20px; }
+            .hr-images { max-width: 100%; }
+            .hr-stories { padding: 50px 20px; }
+            .hr-story h3 { font-size: 24px; }
+            .hr-final-cta { padding: 20px 20px 60px; }
+            .hr-final-cta .hr-cta-btn,
+            .hr-final-cta .hr-cta-outline {
+                display: block;
+                width: 100%;
+                margin: 0 0 12px 0;
+            }
+        }
+        /* ===== IMAGE PROTECTION OVERLAY ===== */
+        .hr-gallery-item,
+        .hr-story-image-wrap,
+        .hr-video-slot,
+        .hr-video-section {
+            position: relative;
+        }
+        .hr-gallery-item::after,
+        .hr-story-image-wrap::after,
+        .hr-video-slot::after,
+        .hr-video-section::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            background: transparent;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== HEADER — Mother's Day Special ===== -->
+    <header class="hr-header">
+        <span class="hr-logo">Mother's Day Special</span>
+    </header>
+
+    <!-- ===== PRODUCT: Two-Column ===== -->
+    <div class="hr-product">
+
+        <!-- LEFT: Product, Video, Closeup, Model, Detail -->
+        <div class="hr-images">
+            <!-- 1. Product Shot -->
+            <div class="hr-img-slot">
+                <img src="https://res.cloudinary.com/dlg2mou53/image/upload/v1774086282/4hrt-heart-ruby-6_tnizfe.jpg" alt="The Heart Ruby — Product Shot">
+            </div>
+            <!-- 2. Video -->
+            <div class="hr-video-slot">
+                <video autoplay muted loop playsinline>
+                    <source src="https://res.cloudinary.com/dlg2mou53/video/upload/v1774037922/B5062_wtindy.mp4" type="video/mp4">
+                </video>
+            </div>
+            <!-- 3. Closeup -->
+            <div class="hr-img-slot">
+                <img src="https://res.cloudinary.com/dlg2mou53/image/upload/v1774059285/heart-pendant-4HRT4_ayb1hi.jpg" alt="The Heart Ruby — Closeup">
+            </div>
+            <!-- 4. Detail View -->
+            <div class="hr-img-slot">
+                <img src="https://res.cloudinary.com/dlg2mou53/image/upload/v1774087696/4hrt-heart-ruby-5_smol2l.jpg" alt="The Heart Ruby — Detail">
+            </div>
+        </div>
+
+        <!-- RIGHT: Product Details (Sticky) -->
+        <div class="hr-details">
+            <div class="hr-details-inner">
+            <h1 class="hr-title">The Heart Ruby</h1>
+            <p style="font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase; color: #d4af37; margin-bottom: 20px;">Mother's Day 2026</p>
+
+            <div style="font-size: 16px; line-height: 1.8; color: #555; margin-bottom: 24px; margin-top: 20px; text-align: center;">
+                A rare, natural ruby cut in a proprietary heart-shape configuration. Each ruby is selected for its depth of color and recut to fit invisibly, stone touching stone, forming a seamless continuum — a unity of color that expands far beyond the limitation of a single gem. Surrounded by a luminous halo of brilliant-cut white diamonds. Set in 18-karat white gold.
+            </div>
+
+            <div class="hr-accordion">
+                <!-- Money-Back Guarantee -->
+                <div style="text-align: center; padding: 12px 0 8px; font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 500; color: #8a7355; letter-spacing: 1px; text-transform: uppercase;">&#10003; 30-Day Money-Back Guarantee</div>
+
+                <!-- Price -->
+                <div class="hr-acc-item">
+                    <button class="hr-acc-btn" onclick="toggleAcc(this)">
+                        <span>Price</span>
+                        <span class="plus">+</span>
+                    </button>
+                    <div class="hr-acc-content">
+                        <div class="hr-acc-inner">
+                            <div style="text-align: left; padding: 0 10px;">
+                                1. &nbsp;19mm &nbsp;&nbsp;3.27 crt. &nbsp;&nbsp;<strong>$12,900</strong><br>
+                                2. &nbsp;22mm &nbsp;&nbsp;4.25 crt. &nbsp;&nbsp;<strong>$14,900</strong><br>
+                                3. &nbsp;24mm &nbsp;&nbsp;5.50 crt. &nbsp;&nbsp;<strong>$23,275</strong>
+                            </div>
+                            <br>
+                            <a href="#size-comparison" style="color: #d4af37; text-decoration: underline; text-underline-offset: 3px; font-size: 11px; letter-spacing: 0.5px;">See size comparison &darr;</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="hr-acc-item">
+                    <button class="hr-acc-btn" onclick="toggleAcc(this)">
+                        Materials &amp; Specifications <span class="plus">+</span>
+                    </button>
+                    <div class="hr-acc-content">
+                        <div class="hr-acc-inner">
+                            The finest natural rubies, invisibly set in a proprietary heart-shape configuration<br>
+                            Brilliant-cut diamond halo<br>
+                            18-Karat White Gold<br>
+                            Available in Yellow Gold<br>
+                            Handmade with care
+                        </div>
+                    </div>
+                </div>
+                <div class="hr-acc-item">
+                    <button class="hr-acc-btn" onclick="toggleAcc(this)">
+                        Certification <span class="plus">+</span>
+                    </button>
+                    <div class="hr-acc-content">
+                        <div class="hr-acc-inner">
+                            Ships with a signed Certificate of Authenticity documenting the design, materials, and proprietary cuts used. All diamonds are certified by GIA or equivalent independent laboratory.
+                        </div>
+                    </div>
+                </div>
+                <div class="hr-acc-item">
+                    <button class="hr-acc-btn" onclick="toggleAcc(this)">
+                        Care Instructions <span class="plus">+</span>
+                    </button>
+                    <div class="hr-acc-content">
+                        <div class="hr-acc-inner">
+                            Store in the provided box when not worn. Clean gently with a soft, lint-free cloth. Professional cleaning available — complimentary for life.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== HERO — Full Window Width ===== -->
+    <div class="hr-full-img">
+        <img src="https://res.cloudinary.com/dlg2mou53/image/upload/v1774034036/rubydiamondheart-1200_n3luta.jpg" alt="The Heart Ruby — A Gift for Mom">
+    </div>
+
+    <!-- ===== THREE STORIES ===== -->
+    <div class="hr-stories">
+        <div class="hr-story">
+            <p class="hr-story-label">The Stone</p>
+            <h3>A Ruby Like No Other</h3>
+            <p>Each ruby is selected for its depth of color and recut to fit a proprietary heart-shape configuration. Set invisibly, stone touching stone, the rubies form a seamless continuum — a unity of color that expands far beyond the limitation of a single gem.</p>
+        </div>
+        <div class="hr-story">
+            <p class="hr-story-label">The Craft</p>
+            <h3>Handmade with Care</h3>
+            <p>Every piece is handcrafted by master jewelers who have dedicated their lives to the art of fine jewelry. Each stone is hand-selected, each setting executed with precision, and each piece finished to the highest standard — a tradition of excellence passed from one generation to the next.</p>
+        </div>
+        <div class="hr-story">
+            <p class="hr-story-label">The Moment</p>
+            <h3>There Is No Better Way</h3>
+            <p>Some may call it sentimental. But a gift from her child is the one she keeps closest. A ruby heart, deep red and perfectly orchestrated, surrounded by a luminous halo of white diamonds — saying what words sometimes can't. Mom, I love you.</p>
+        </div>
+    </div>
+
+    <!-- ===== SIZE COMPARISON IMAGES ===== -->
+    <div class="hr-four-images" id="size-comparison">
+        <div class="hr-thumb">
+            <img src="https://res.cloudinary.com/dlg2mou53/image/upload/v1774425620/4hrt-heart-ruby--N1_gxuwdf.jpg" alt="The Heart Ruby — View 1">
+        </div>
+        <div class="hr-thumb">
+            <img src="https://res.cloudinary.com/dlg2mou53/image/upload/v1774425644/4hrt-heart-ruby-N3_qxhxzj.jpg" alt="The Heart Ruby — View 2">
+        </div>
+        <div class="hr-thumb">
+            <img src="https://res.cloudinary.com/dlg2mou53/image/upload/v1774425630/4hrt-heart-ruby-N2_cokltu.jpg" alt="The Heart Ruby — View 3">
+        </div>
+    </div>
+
+    <!-- ===== LIGHTBOX OVERLAY ===== -->
+    <div class="hr-lightbox" id="lightbox" onclick="closeLightbox(event)">
+        <span class="hr-lightbox-close">&times;</span>
+        <span class="hr-lightbox-arrow hr-lightbox-prev" onclick="lightboxNav(event, -1)">&#8249;</span>
+        <img id="lightbox-img" src="" alt="">
+        <span class="hr-lightbox-arrow hr-lightbox-next" onclick="lightboxNav(event, 1)">&#8250;</span>
+    </div>
+
+    <!-- ===== FOOTER — Clean, no branding ===== -->
+    <footer class="hr-footer">
+        <p style="font-family: 'Cormorant Garamond', serif; font-size: 18px; color: #d4af37; letter-spacing: 2px; margin-bottom: 12px;">The Heart Ruby</p>
+        <p style="font-size: 10px; color: #555;">Handmade with care &nbsp;&middot;&nbsp; 18-Karat White Gold &nbsp;&middot;&nbsp; Natural Rubies &amp; Diamonds</p>
+        <p class="hr-footer-tag">A gift she'll never forget</p>
+    </footer>
+
+    <script>
+        function toggleAcc(btn) {
+            const content = btn.nextElementSibling;
+            const isOpen = btn.classList.contains('open');
+            document.querySelectorAll('.hr-acc-btn').forEach(b => {
+                b.classList.remove('open');
+                b.nextElementSibling.style.maxHeight = null;
+            });
+            if (!isOpen) {
+                btn.classList.add('open');
+                content.style.maxHeight = content.scrollHeight + 'px';
+            }
+        }
+    </script>
+
+    <!-- Lightbox with Navigation -->
+    <script>
+        var lbImages = [];
+        var lbIndex = 0;
+        document.querySelectorAll('.hr-four-images .hr-thumb img').forEach(function(img, i) {
+            lbImages.push(img.src);
+            img.addEventListener('click', function() {
+                lbIndex = i;
+                document.getElementById('lightbox-img').src = lbImages[lbIndex];
+                document.getElementById('lightbox').classList.add('active');
+            });
+        });
+        function lightboxNav(e, dir) {
+            e.stopPropagation();
+            lbIndex = (lbIndex + dir + lbImages.length) % lbImages.length;
+            document.getElementById('lightbox-img').src = lbImages[lbIndex];
+        }
+        function closeLightbox(e) {
+            if (e && (e.target.classList.contains('hr-lightbox-arrow') || e.target.id === 'lightbox-img')) return;
+            document.getElementById('lightbox').classList.remove('active');
+        }
+        document.addEventListener('keydown', function(e) {
+            if (!document.getElementById('lightbox').classList.contains('active')) return;
+            if (e.key === 'Escape') document.getElementById('lightbox').classList.remove('active');
+            if (e.key === 'ArrowLeft') lightboxNav(e, -1);
+            if (e.key === 'ArrowRight') lightboxNav(e, 1);
+        });
+    </script>
+
+    <!-- Image & Video Protection -->
+    <script>
+        document.addEventListener('contextmenu', function(e) {
+            if (e.target.tagName === 'IMG' || e.target.tagName === 'VIDEO') {
+                e.preventDefault();
+            }
+        });
+        document.addEventListener('dragstart', function(e) {
+            if (e.target.tagName === 'IMG' || e.target.tagName === 'VIDEO') {
+                e.preventDefault();
+            }
+        });
+        document.querySelectorAll('img').forEach(function(img) {
+            img.style.userSelect = 'none';
+            img.style.webkitUserSelect = 'none';
+            img.setAttribute('draggable', 'false');
+        });
+        document.querySelectorAll('video').forEach(function(vid) {
+            vid.setAttribute('controlsList', 'nodownload');
+            vid.setAttribute('disablePictureInPicture', '');
+            vid.setAttribute('draggable', 'false');
+            vid.style.userSelect = 'none';
+            vid.style.webkitUserSelect = 'none';
+            vid.removeAttribute('controls');
+        });
+    </script>
+
+</body>
+</html>
