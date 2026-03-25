@@ -210,6 +210,84 @@
             display: block;
         }
 
+        /* ===== FOUR-IMAGE HORIZONTAL ROW ===== */
+        .hr-four-images {
+            display: flex;
+            gap: 4px;
+            width: 100%;
+            max-width: 1270px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+        .hr-four-images .hr-thumb {
+            flex: 1;
+            aspect-ratio: 1/1;
+            overflow: hidden;
+            background: linear-gradient(135deg, #f5f1eb, #ede8df);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .hr-four-images .hr-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            cursor: pointer;
+        }
+
+        /* ===== LIGHTBOX ===== */
+        .hr-lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.92);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        .hr-lightbox.active {
+            display: flex;
+        }
+        .hr-lightbox img {
+            max-width: 90%;
+            max-height: 90vh;
+            object-fit: contain;
+            border: none;
+            box-shadow: 0 0 60px rgba(0, 0, 0, 0.5);
+        }
+        .hr-lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 28px;
+            color: #fff;
+            cursor: pointer;
+            font-weight: 300;
+            line-height: 1;
+            z-index: 10000;
+        }
+        .hr-lightbox-close:hover { color: #d4af37; }
+        .hr-four-images .hr-thumb-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 11px;
+            color: #bbb;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        @media (max-width: 640px) {
+            .hr-four-images { padding: 0 20px; gap: 2px; }
+        }
+
         /* ===== HERO IMAGE — Actual size, centered ===== */
         .hr-full-img {
             width: 100%;
@@ -334,7 +412,28 @@
                 margin: 0 0 12px 0;
             }
         }
+        /* ===== IMAGE PROTECTION OVERLAY ===== */
+        .hr-gallery-item,
+        .hr-story-image-wrap,
+        .hr-video-slot,
+        .hr-video-section {
+            position: relative;
+        }
+        .hr-gallery-item::after,
+        .hr-story-image-wrap::after,
+        .hr-video-slot::after,
+        .hr-video-section::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            background: transparent;
+        }
     </style>
+    <meta name="copyright" content="© 2026 Bez Ambar Inc. All images, videos, and content are the exclusive property of Bez Ambar Inc. Unauthorized use, reproduction, or distribution is strictly prohibited.">
 </head>
 <body>
 
@@ -362,11 +461,7 @@
             <div class="hr-img-slot">
                 <img src="https://res.cloudinary.com/dlg2mou53/image/upload/v1774059285/heart-pendant-4HRT4_ayb1hi.jpg" alt="The Heart Ruby — Closeup">
             </div>
-            <!-- 4. On Model -->
-            <div class="hr-img-slot">
-                <img src="https://res.cloudinary.com/dlg2mou53/image/upload/v1774059296/4hrt-heart-ruby-3_iwzfhk.jpg" alt="The Heart Ruby — On Model">
-            </div>
-            <!-- 5. Detail View -->
+            <!-- 4. Detail View -->
             <div class="hr-img-slot">
                 <img src="https://res.cloudinary.com/dlg2mou53/image/upload/v1774087696/4hrt-heart-ruby-5_smol2l.jpg" alt="The Heart Ruby — Detail">
             </div>
@@ -388,17 +483,24 @@
             </div>
 
             <div class="hr-accordion">
+                <!-- Money-Back Guarantee -->
+                <div style="text-align: center; padding: 12px 0 8px; font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 500; color: #8a7355; letter-spacing: 1px; text-transform: uppercase;">&#10003; 30-Day Money-Back Guarantee</div>
+
                 <!-- Price -->
                 <div class="hr-acc-item">
                     <button class="hr-acc-btn" onclick="toggleAcc(this)">
                         <span>Price</span>
-                        <span style="display: flex; align-items: center; gap: 10px;"><span style="font-size: 14px; font-weight: 600;">$11,200</span> <span class="plus">+</span></span>
+                        <span class="plus">+</span>
                     </button>
                     <div class="hr-acc-content">
                         <div class="hr-acc-inner">
-                            Pricing will vary based on the different shapes and sizes of the piece that can be put together.<br><br>
-                            The piece shown here features 3.15 total carat weight of rubies and diamonds and uses high-quality rubies.<br><br>
-                            Price for the piece shown: $11,200
+                            <div style="text-align: left; padding: 0 10px;">
+                                1. &nbsp;19mm &nbsp;&nbsp;3.27 crt. &nbsp;&nbsp;<strong>$12,900</strong><br>
+                                2. &nbsp;22mm &nbsp;&nbsp;4.25 crt. &nbsp;&nbsp;<strong>$14,900</strong><br>
+                                3. &nbsp;24mm &nbsp;&nbsp;5.50 crt. &nbsp;&nbsp;<strong>$23,275</strong>
+                            </div>
+                            <br>
+                            <a href="#size-comparison" style="color: #d4af37; text-decoration: underline; text-underline-offset: 3px; font-size: 11px; letter-spacing: 0.5px;">See size comparison &darr;</a>
                         </div>
                     </div>
                 </div>
@@ -408,9 +510,10 @@
                     </button>
                     <div class="hr-acc-content">
                         <div class="hr-acc-inner">
-                            18-Karat White Gold<br>
-                            Natural rubies, invisibly set in proprietary heart-shape configuration<br>
+                            The finest natural rubies, invisibly set in a proprietary heart-shape configuration<br>
                             Brilliant-cut diamond halo<br>
+                            18-Karat White Gold<br>
+                            Available in Yellow Gold<br>
                             Handcrafted in Los Angeles<br>
                             Signed by Bez Ambar
                         </div>
@@ -432,7 +535,7 @@
                     </button>
                     <div class="hr-acc-content">
                         <div class="hr-acc-inner">
-                            Store in the provided Bez Ambar presentation box when not worn. Clean gently with a soft, lint-free cloth. Avoid contact with perfumes, lotions, and chemicals. Professional cleaning available at our LA atelier — complimentary for life.
+                            Store in the provided Bez Ambar box when not worn. Clean gently with a soft, lint-free cloth. Professional cleaning available at our LA atelier — complimentary for life.
                         </div>
                     </div>
                 </div>
@@ -462,6 +565,19 @@
             <p class="hr-story-label">The Moment</p>
             <h3>There Is No Better Way</h3>
             <p>Some may call it sentimental. But a gift from her child is the one she keeps closest. A ruby heart, deep red and perfectly orchestrated, surrounded by a luminous halo of white diamonds — saying what words sometimes can't. Mom, I love you.</p>
+        </div>
+    </div>
+
+    <!-- ===== SIZE COMPARISON IMAGES ===== -->
+    <div class="hr-four-images" id="size-comparison">
+        <div class="hr-thumb">
+            <img src="https://res.cloudinary.com/dlg2mou53/image/upload/v1774425620/4hrt-heart-ruby--N1_gxuwdf.jpg" alt="The Heart Ruby — View 1">
+        </div>
+        <div class="hr-thumb">
+            <img src="https://res.cloudinary.com/dlg2mou53/image/upload/v1774425644/4hrt-heart-ruby-N3_qxhxzj.jpg" alt="The Heart Ruby — View 2">
+        </div>
+        <div class="hr-thumb">
+            <img src="https://res.cloudinary.com/dlg2mou53/image/upload/v1774425630/4hrt-heart-ruby-N2_cokltu.jpg" alt="The Heart Ruby — View 3">
         </div>
     </div>
 
@@ -506,6 +622,12 @@
         <p style="margin-top: 20px; font-family: 'Montserrat', sans-serif; font-size: 12px; color: #999;">or call us at <a href="tel:2136299191" style="color: #1a1a1a; text-decoration: none;">(213) 629-9191</a></p>
     </div>
 
+    <!-- ===== LIGHTBOX OVERLAY ===== -->
+    <div class="hr-lightbox" id="lightbox" onclick="closeLightbox()">
+        <span class="hr-lightbox-close">&times;</span>
+        <img id="lightbox-img" src="" alt="">
+    </div>
+
     <!-- ===== FOOTER — Simple ===== -->
     <footer class="hr-footer">
         <div class="hr-footer-logo">BEZ AMBAR</div>
@@ -527,6 +649,53 @@
                 content.style.maxHeight = content.scrollHeight + 'px';
             }
         }
+    </script>
+
+    <!-- Lightbox -->
+    <script>
+        document.querySelectorAll('.hr-four-images .hr-thumb img').forEach(function(img) {
+            img.addEventListener('click', function() {
+                document.getElementById('lightbox-img').src = this.src;
+                document.getElementById('lightbox').classList.add('active');
+            });
+        });
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeLightbox();
+        });
+    </script>
+
+    <!-- Image & Video Protection -->
+    <script>
+        // Disable right-click on images and videos
+        document.addEventListener('contextmenu', function(e) {
+            if (e.target.tagName === 'IMG' || e.target.tagName === 'VIDEO') {
+                e.preventDefault();
+            }
+        });
+        // Disable drag on images and videos
+        document.addEventListener('dragstart', function(e) {
+            if (e.target.tagName === 'IMG' || e.target.tagName === 'VIDEO') {
+                e.preventDefault();
+            }
+        });
+        // Disable image selection
+        document.querySelectorAll('img').forEach(function(img) {
+            img.style.userSelect = 'none';
+            img.style.webkitUserSelect = 'none';
+            img.setAttribute('draggable', 'false');
+        });
+        // Disable video download & protect videos
+        document.querySelectorAll('video').forEach(function(vid) {
+            vid.setAttribute('controlsList', 'nodownload');
+            vid.setAttribute('disablePictureInPicture', '');
+            vid.setAttribute('draggable', 'false');
+            vid.style.userSelect = 'none';
+            vid.style.webkitUserSelect = 'none';
+            vid.removeAttribute('controls');
+        });
     </script>
 
 </body>
