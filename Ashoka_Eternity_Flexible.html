@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ashoka Eternity Flexible — William Goldberg</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            color: #1a1a1a;
+            background: #ffffff;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+        a { color: inherit; text-decoration: none; }
+        img { display: block; max-width: 100%; height: auto; }
+
+        /* ===== HEADER ===== */
+        .hr-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: #ffffff;
+            border-bottom: 1px solid #e8e4de;
+            padding: 20px;
+            text-align: center;
+        }
+        .hr-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 22px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            color: #1a1a1a;
+            text-transform: uppercase;
+            text-decoration: none;
+        }
+
+        /* ===== TWO-COLUMN PRODUCT LAYOUT ===== */
+        .hr-product {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 40px;
+            min-height: 100vh;
+        }
+        .hr-images {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 752px;
+            flex-shrink: 0;
+        }
+        .hr-img-slot {
+            width: 100%;
+            aspect-ratio: 1/1;
+            overflow: hidden;
+            background: linear-gradient(135deg, #f5f1eb, #ede8df);
+        }
+        .hr-img-slot img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            cursor: pointer;
+        }
+        .hr-img-slot.placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .hr-img-slot.placeholder::after {
+            content: 'IMAGE COMING SOON';
+            font-family: 'Montserrat', sans-serif;
+            font-size: 11px;
+            letter-spacing: 3px;
+            color: #bbb;
+        }
+        .hr-video-slot {
+            width: 100%;
+            aspect-ratio: 1/1;
+            overflow: hidden;
+            background: #0d0d0d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .hr-video-slot video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .hr-video-slot.placeholder::after {
+            content: 'VIDEO COMING SOON';
+            font-family: 'Montserrat', sans-serif;
+            font-size: 11px;
+            letter-spacing: 3px;
+            color: #555;
+        }
+        .hr-details {
+            padding: 40px 0 60px;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            flex: 1;
+            max-width: 500px;
+        }
+        .hr-details-inner {
+            max-width: 400px;
+            width: 100%;
+        }
+        .hr-sku {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 11px;
+            color: #999;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+        .hr-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 32px;
+            font-weight: 500;
+            line-height: 1.2;
+            margin-bottom: 10px;
+            color: #1a1a1a;
+        }
+        .hr-cta-btn {
+            display: block;
+            width: 100%;
+            padding: 18px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-align: center;
+            background: #1a1a1a;
+            color: #d4af37;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s;
+            text-decoration: none;
+            margin-bottom: 12px;
+        }
+        .hr-cta-btn:hover { background: #333; }
+        .hr-cta-outline {
+            display: block;
+            width: 100%;
+            padding: 16px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-align: center;
+            background: transparent;
+            color: #1a1a1a;
+            border: 1.5px solid #1a1a1a;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            margin-bottom: 12px;
+        }
+        .hr-cta-outline:hover { background: #1a1a1a; color: #d4af37; }
+        .hr-phone-link {
+            display: block;
+            text-align: center;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12px;
+            font-weight: 500;
+            color: #999;
+            margin-top: 6px;
+            margin-bottom: 30px;
+        }
+        .hr-phone-link a {
+            color: #1a1a1a;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+        .hr-accordion { border-top: 1px solid #e8e4de; }
+        .hr-acc-item { border-bottom: 1px solid #e8e4de; }
+        .hr-acc-btn {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 0;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            color: #1a1a1a;
+        }
+        .hr-acc-btn .plus {
+            font-size: 18px;
+            font-weight: 300;
+            transition: transform 0.3s;
+        }
+        .hr-acc-btn.open .plus { transform: rotate(45deg); }
+        .hr-acc-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s ease;
+        }
+        .hr-acc-inner {
+            padding: 0 0 16px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12px;
+            color: #666;
+            line-height: 1.8;
+            text-align: center;
+        }
+
+        /* ===== VIDEO ===== */
+        .hr-video-section {
+            width: 100%;
+            background: #0d0d0d;
+        }
+        .hr-video-section video {
+            width: 100%;
+            display: block;
+        }
+
+        /* ===== FOUR-IMAGE HORIZONTAL ROW ===== */
+        .hr-four-images {
+            display: flex;
+            gap: 4px;
+            width: 100%;
+            max-width: 1270px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+        .hr-four-images .hr-thumb {
+            flex: 1;
+            aspect-ratio: 1/1;
+            overflow: hidden;
+            background: linear-gradient(135deg, #f5f1eb, #ede8df);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .hr-four-images .hr-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            cursor: pointer;
+        }
+        .hr-four-images .hr-thumb.placeholder::after {
+            content: '+';
+            font-family: 'Montserrat', sans-serif;
+            font-size: 28px;
+            font-weight: 300;
+            color: #ccc;
+        }
+
+        /* ===== LIGHTBOX WITH ZOOM ===== */
+        .hr-lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 9999;
+            overflow: hidden;
+        }
+        .hr-lightbox.active { display: flex; align-items: center; justify-content: center; }
+        .hr-lightbox-viewport {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            cursor: grab;
+        }
+        .hr-lightbox-viewport.dragging { cursor: grabbing; }
+        .hr-lightbox-viewport img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform-origin: 0 0;
+            max-width: none;
+            border: none;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+        .hr-lightbox-close {
+            position: fixed;
+            top: 20px;
+            right: 30px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 28px;
+            color: #fff;
+            cursor: pointer;
+            font-weight: 300;
+            line-height: 1;
+            z-index: 10001;
+        }
+        .hr-lightbox-close:hover { color: #d4af37; }
+        .hr-lightbox-arrow {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 40px;
+            color: #fff;
+            cursor: pointer;
+            font-weight: 300;
+            font-family: 'Montserrat', sans-serif;
+            z-index: 10001;
+            padding: 20px;
+            user-select: none;
+            -webkit-user-select: none;
+            transition: color 0.2s;
+        }
+        .hr-lightbox-arrow:hover { color: #d4af37; }
+        .hr-lightbox-prev { left: 20px; }
+        .hr-lightbox-next { right: 20px; }
+        .hr-zoom-controls {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 10001;
+            background: rgba(0,0,0,0.6);
+            padding: 10px 20px;
+            border-radius: 30px;
+        }
+        .hr-zoom-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1.5px solid #666;
+            background: transparent;
+            color: #fff;
+            font-size: 22px;
+            font-weight: 300;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Montserrat', sans-serif;
+            transition: all 0.2s;
+        }
+        .hr-zoom-btn:hover { border-color: #d4af37; color: #d4af37; }
+        .hr-zoom-level {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12px;
+            color: #999;
+            letter-spacing: 1px;
+            min-width: 50px;
+            text-align: center;
+        }
+        @media (max-width: 640px) {
+            .hr-four-images { padding: 0 20px; gap: 2px; }
+        }
+
+        /* ===== HERO IMAGE ===== */
+        .hr-full-img {
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            background: #000;
+        }
+        .hr-full-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* ===== THREE STORIES ===== */
+        .hr-stories {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 80px 40px;
+        }
+        .hr-story {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        .hr-story:last-child { margin-bottom: 0; }
+        .hr-story-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: #d4af37;
+            margin-bottom: 12px;
+        }
+        .hr-story h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 28px;
+            font-weight: 500;
+            color: #1a1a1a;
+            margin-bottom: 14px;
+        }
+        .hr-story p {
+            font-size: 16px;
+            color: #777;
+            line-height: 1.8;
+            max-width: 520px;
+            margin: 0 auto;
+        }
+
+        /* ===== FINAL CTA ===== */
+        .hr-final-cta {
+            text-align: center;
+            padding: 20px 40px 80px;
+        }
+        .hr-final-cta .hr-cta-btn {
+            display: inline-block;
+            width: auto;
+            padding: 18px 60px;
+        }
+        .hr-final-cta .hr-cta-outline {
+            display: inline-block;
+            width: auto;
+            padding: 16px 50px;
+            margin-left: 10px;
+        }
+        .hr-final-cta p {
+            margin-top: 18px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12px;
+            color: #999;
+        }
+        .hr-final-cta p a {
+            color: #1a1a1a;
+            text-decoration: none;
+        }
+
+        /* ===== FOOTER ===== */
+        .hr-footer {
+            background: #0d0d0d;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        .hr-footer p {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 10px;
+            color: #555;
+            line-height: 2;
+        }
+        .hr-footer a { color: #777; }
+        .hr-footer-tag {
+            margin-top: 14px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 9px;
+            color: #444;
+            letter-spacing: 0.5px;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .hr-product { flex-direction: column; align-items: center; gap: 30px; padding: 20px; }
+            .hr-images { width: 100%; max-width: 400px; }
+            .hr-details { position: static; height: auto; padding: 30px 20px; max-width: 100%; }
+        }
+        @media (max-width: 640px) {
+            .hr-details { padding: 30px 20px; }
+            .hr-images { max-width: 100%; }
+            .hr-stories { padding: 50px 20px; }
+            .hr-story h3 { font-size: 24px; }
+            .hr-final-cta { padding: 20px 20px 60px; }
+            .hr-final-cta .hr-cta-btn,
+            .hr-final-cta .hr-cta-outline {
+                display: block;
+                width: 100%;
+                margin: 0 0 12px 0;
+            }
+        }
+
+        /* ===== IMAGE PROTECTION OVERLAY ===== */
+        .hr-gallery-item,
+        .hr-story-image-wrap,
+        .hr-video-slot,
+        .hr-video-section {
+            position: relative;
+        }
+        .hr-gallery-item::after,
+        .hr-story-image-wrap::after,
+        .hr-video-slot::after,
+        .hr-video-section::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            background: transparent;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header class="hr-header">
+        <span class="hr-logo">William Goldberg</span>
+    </header>
+
+    <!-- ===== PRODUCT: Two-Column ===== -->
+    <div class="hr-product">
+
+        <!-- LEFT: Product Images -->
+        <div class="hr-images">
+            <!-- 1. One Carat Eternity Bracelet -->
+            <div class="hr-img-slot">
+                <img src="https://res.cloudinary.com/dlg2mou53/image/upload/v1774988865/Once_Carats_Eternity_Bracelets_Ashoka_gcsmgo.jpg" alt="Ashoka Eternity Flexible — One Carat Bracelet">
+            </div>
+            <!-- 2. Product Shot — Three-Row Bracelet -->
+            <div class="hr-img-slot">
+                <img src="https://res.cloudinary.com/dlg2mou53/image/upload/v1774985919/Ashoka_three_rows_bracelet_90_points_each_Mustard_4000x4000_Gradient_v2_small_stones_zfoj4k.png" alt="Ashoka Eternity Flexible — Three-Row Bracelet">
+            </div>
+            <!-- 3. Alternate Angle -->
+            <div class="hr-img-slot">
+                <img src="https://res.cloudinary.com/dlg2mou53/image/upload/v1774985930/Ashoka_three_rows_bracelet_90_points_each_Mustard_4000x4000_Gradient_v2_21_hizfah.png" alt="Ashoka Eternity Flexible — Detail View">
+            </div>
+            <!-- 4. Netale Detail -->
+            <div class="hr-img-slot">
+                <img src="https://res.cloudinary.com/dlg2mou53/image/upload/v1774988872/Netale.jpg-2_xdvxzp.jpg" alt="Ashoka Eternity Flexible — Detail">
+            </div>
+        </div>
+
+        <!-- RIGHT: Product Details (Sticky) -->
+        <div class="hr-details">
+            <div class="hr-details-inner">
+            <h1 class="hr-title">Ashoka Eternity Flexible</h1>
+            <p style="font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase; color: #d4af37; margin-bottom: 20px;">Three-Row Ashoka Bracelet</p>
+
+            <div style="font-size: 16px; line-height: 1.8; color: #555; margin-bottom: 24px; margin-top: 20px; text-align: center;">
+                Three parallel rows of Ashoka-cut diamonds, each stone .20 carats, set in a flexible articulated mounting that moves with the wrist. Every diamond is hand-selected for its elongated brilliance and set to flow continuously — an unbroken current of light that wraps the wrist in quiet radiance.
+            </div>
+
+            <div class="hr-accordion">
+                <!-- Materials & Specifications -->
+                <div class="hr-acc-item">
+                    <button class="hr-acc-btn" onclick="toggleAcc(this)">
+                        Materials &amp; Specifications <span class="plus">+</span>
+                    </button>
+                    <div class="hr-acc-content" id="specs-content">
+                        <div class="hr-acc-inner">
+                            <div style="text-align: left; padding: 0 10px;">
+                                <strong style="color: #d4af37; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;">One Row</strong><br>
+                                .2CT &mdash; 39 stones &mdash; <strong>7.80 TCW</strong><br>
+                                .3CT &mdash; 34 stones &mdash; <strong>10.20 TCW</strong><br>
+                                .4CT &mdash; 30 stones &mdash; <strong>12.00 TCW</strong><br>
+                                .5CT &mdash; 28 stones &mdash; <strong>14.00 TCW</strong><br>
+                                .6CT &mdash; 27 stones &mdash; <strong>16.20 TCW</strong><br>
+                                .7CT &mdash; 26 stones &mdash; <strong>18.20 TCW</strong><br>
+                                .9CT &mdash; 24 stones &mdash; <strong>21.60 TCW</strong><br>
+                                1CT &mdash; 23 stones &mdash; <strong>23.00 TCW</strong>
+                            </div>
+                            <div style="text-align: left; padding: 16px 10px 0;">
+                                <strong style="color: #d4af37; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;">Two Rows</strong><br>
+                                .2CT &mdash; 78 stones &mdash; <strong>15.60 TCW</strong><br>
+                                .3CT &mdash; 68 stones &mdash; <strong>20.40 TCW</strong><br>
+                                .4CT &mdash; 60 stones &mdash; <strong>24.00 TCW</strong><br>
+                                .5CT &mdash; 56 stones &mdash; <strong>28.00 TCW</strong><br>
+                                .6CT &mdash; 54 stones &mdash; <strong>32.40 TCW</strong><br>
+                                .7CT &mdash; 52 stones &mdash; <strong>36.40 TCW</strong><br>
+                                .9CT &mdash; 48 stones &mdash; <strong>43.20 TCW</strong><br>
+                                1CT &mdash; 46 stones &mdash; <strong>46.00 TCW</strong>
+                            </div>
+                            <div style="text-align: left; padding: 16px 10px 0;">
+                                <strong style="color: #d4af37; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;">Three Rows</strong><br>
+                                .2CT &mdash; 117 stones &mdash; <strong>23.40 TCW</strong><br>
+                                .3CT &mdash; 102 stones &mdash; <strong>30.60 TCW</strong><br>
+                                .4CT &mdash; 90 stones &mdash; <strong>36.00 TCW</strong><br>
+                                .5CT &mdash; 84 stones &mdash; <strong>42.00 TCW</strong><br>
+                                .6CT &mdash; 81 stones &mdash; <strong>48.60 TCW</strong><br>
+                                .7CT &mdash; 78 stones &mdash; <strong>54.60 TCW</strong><br>
+                                .9CT &mdash; 72 stones &mdash; <strong>64.80 TCW</strong><br>
+                                1CT &mdash; 69 stones &mdash; <strong>69.00 TCW</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== THREE STORIES ===== -->
+    <div class="hr-stories">
+        <div class="hr-story">
+            <p class="hr-story-label">The Stone</p>
+            <h3>The Ashoka Cut</h3>
+            <p>Named after Ashoka the Great, the Ashoka cut transforms a rough diamond into an elongated, faceted form of extraordinary brilliance. Rarer than most cuts and demanding far more from the rough, it produces a stone of unusual luminosity — light moves through it differently, returning in broader, softer flashes that give each diamond an unmistakable presence.</p>
+        </div>
+        <div class="hr-story">
+            <p class="hr-story-label">The Construction</p>
+            <h3>Engineered to Move</h3>
+            <p>Each bracelet is constructed from individually articulated links, allowing three parallel rows of Ashoka diamonds to flex and follow the natural motion of the wrist. The mounting is engineered for comfort and durability — invisible from the surface, it holds every stone in precise alignment while permitting the freedom of movement that defines a piece meant to be worn, not just admired.</p>
+        </div>
+        <div class="hr-story">
+            <p class="hr-story-label">The Design</p>
+            <h3>An Eternity of Light</h3>
+            <p>The Ashoka Eternity Flexible presents an unbroken field of diamonds — three rows deep, continuous around the wrist, with no beginning and no end. It is a bracelet that does not merely hold stones; it orchestrates them into a single, flowing expression of light. Quiet in its architecture. Unmistakable in its effect.</p>
+        </div>
+    </div>
+
+    <!-- ===== GALLERY ROW (Placeholders for future images) ===== -->
+    <div class="hr-four-images" id="gallery">
+        <div class="hr-thumb">
+            <img src="https://res.cloudinary.com/dlg2mou53/image/upload/v1774985919/Ashoka_three_rows_bracelet_90_points_each_Mustard_4000x4000_Gradient_v2_small_stones_zfoj4k.png" alt="Ashoka Eternity — View 1">
+        </div>
+        <div class="hr-thumb">
+            <img src="https://res.cloudinary.com/dlg2mou53/image/upload/v1774985930/Ashoka_three_rows_bracelet_90_points_each_Mustard_4000x4000_Gradient_v2_21_hizfah.png" alt="Ashoka Eternity — View 2">
+        </div>
+        <div class="hr-thumb">
+            <img src="https://res.cloudinary.com/dlg2mou53/image/upload/v1774988865/Once_Carats_Eternity_Bracelets_Ashoka_gcsmgo.jpg" alt="Ashoka Eternity — View 3">
+        </div>
+        <div class="hr-thumb">
+            <img src="https://res.cloudinary.com/dlg2mou53/image/upload/v1774988872/Netale.jpg-2_xdvxzp.jpg" alt="Ashoka Eternity — View 4">
+        </div>
+    </div>
+
+    <!-- ===== LIGHTBOX OVERLAY WITH ZOOM ===== -->
+    <div class="hr-lightbox" id="lightbox">
+        <span class="hr-lightbox-close" onclick="closeLightbox()">&times;</span>
+        <span class="hr-lightbox-arrow hr-lightbox-prev" onclick="lightboxNav(event, -1)">&#8249;</span>
+        <span class="hr-lightbox-arrow hr-lightbox-next" onclick="lightboxNav(event, 1)">&#8250;</span>
+        <div class="hr-lightbox-viewport" id="lb-viewport">
+            <img id="lightbox-img" src="" alt="" draggable="false">
+        </div>
+        <div class="hr-zoom-controls">
+            <button class="hr-zoom-btn" onclick="zoomChange(-1)" title="Zoom Out">&minus;</button>
+            <span class="hr-zoom-level" id="zoom-level">100%</span>
+            <button class="hr-zoom-btn" onclick="zoomChange(1)" title="Zoom In">+</button>
+            <button class="hr-zoom-btn" onclick="zoomReset()" title="Fit to Screen" style="font-size: 14px;">&#8634;</button>
+        </div>
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="hr-footer">
+        <p style="font-family: 'Cormorant Garamond', serif; font-size: 18px; color: #d4af37; letter-spacing: 2px; margin-bottom: 12px;">Ashoka Eternity Flexible</p>
+        <p style="font-size: 10px; color: #555;">Handmade with care &nbsp;&middot;&nbsp; 18-Karat Gold &nbsp;&middot;&nbsp; Ashoka-Cut Diamonds</p>
+    </footer>
+
+    <script>
+        function toggleAcc(btn) {
+            const content = btn.nextElementSibling;
+            const isOpen = btn.classList.contains('open');
+            document.querySelectorAll('.hr-acc-btn').forEach(b => {
+                b.classList.remove('open');
+                b.nextElementSibling.style.maxHeight = null;
+            });
+            if (!isOpen) {
+                btn.classList.add('open');
+                content.style.maxHeight = content.scrollHeight + 'px';
+            }
+        }
+        // Open Materials & Specifications on page load
+        (function() {
+            var specsContent = document.getElementById('specs-content');
+            var specsBtn = specsContent.previousElementSibling;
+            specsBtn.classList.add('open');
+            specsContent.style.maxHeight = specsContent.scrollHeight + 'px';
+        })();
+    </script>
+
+    <!-- Lightbox with Zoom & Pan -->
+    <script>
+        var lbImages = [];
+        var lbIndex = 0;
+        var zoomScale = 1;
+        var panX = 0, panY = 0;
+        var isDragging = false, dragStartX = 0, dragStartY = 0, dragPanX = 0, dragPanY = 0;
+        var imgNatW = 0, imgNatH = 0, fitScale = 1;
+
+        // Collect all product images
+        document.querySelectorAll('.hr-img-slot img').forEach(function(img) {
+            lbImages.push(img.src);
+            img.addEventListener('click', function() {
+                openLightbox(lbImages.indexOf(img.src));
+            });
+        });
+
+        // Collect gallery thumbnails (avoid duplicates)
+        document.querySelectorAll('.hr-four-images .hr-thumb img').forEach(function(img) {
+            if (lbImages.indexOf(img.src) === -1) {
+                lbImages.push(img.src);
+            }
+            img.addEventListener('click', function() {
+                openLightbox(lbImages.indexOf(img.src));
+            });
+        });
+
+        function openLightbox(index) {
+            lbIndex = index;
+            var lbImg = document.getElementById('lightbox-img');
+            lbImg.onload = function() {
+                imgNatW = lbImg.naturalWidth;
+                imgNatH = lbImg.naturalHeight;
+                zoomReset();
+            };
+            lbImg.src = lbImages[lbIndex];
+            document.getElementById('lightbox').classList.add('active');
+        }
+
+        function updateImgTransform() {
+            var lbImg = document.getElementById('lightbox-img');
+            var displayW = imgNatW * fitScale * zoomScale;
+            var displayH = imgNatH * fitScale * zoomScale;
+            lbImg.style.width = displayW + 'px';
+            lbImg.style.height = displayH + 'px';
+            lbImg.style.left = (panX - displayW / 2) + 'px';
+            lbImg.style.top = (panY - displayH / 2) + 'px';
+            lbImg.style.transform = 'none';
+            document.getElementById('zoom-level').textContent = Math.round(zoomScale * 100) + '%';
+        }
+
+        function zoomReset() {
+            var vw = window.innerWidth;
+            var vh = window.innerHeight;
+            var scaleW = (vw * 0.85) / imgNatW;
+            var scaleH = (vh * 0.85) / imgNatH;
+            fitScale = Math.min(scaleW, scaleH);
+            zoomScale = 1;
+            panX = vw / 2;
+            panY = vh / 2;
+            updateImgTransform();
+        }
+
+        function zoomChange(dir) {
+            var steps = [0.25, 0.5, 0.75, 1, 1.5, 2, 2.5, 3];
+            var currentIdx = 0;
+            for (var i = 0; i < steps.length; i++) {
+                if (Math.abs(steps[i] - zoomScale) < Math.abs(steps[currentIdx] - zoomScale)) {
+                    currentIdx = i;
+                }
+            }
+            var newIdx = Math.max(0, Math.min(steps.length - 1, currentIdx + dir));
+            zoomScale = steps[newIdx];
+            updateImgTransform();
+        }
+
+        // Mouse wheel zoom
+        document.getElementById('lb-viewport').addEventListener('wheel', function(e) {
+            e.preventDefault();
+            var dir = e.deltaY < 0 ? 1 : -1;
+            zoomChange(dir);
+        }, { passive: false });
+
+        // Drag to pan
+        var viewport = document.getElementById('lb-viewport');
+        viewport.addEventListener('mousedown', function(e) {
+            if (e.target.tagName === 'IMG') {
+                isDragging = true;
+                dragStartX = e.clientX;
+                dragStartY = e.clientY;
+                dragPanX = panX;
+                dragPanY = panY;
+                viewport.classList.add('dragging');
+                e.preventDefault();
+            }
+        });
+        window.addEventListener('mousemove', function(e) {
+            if (!isDragging) return;
+            panX = dragPanX + (e.clientX - dragStartX);
+            panY = dragPanY + (e.clientY - dragStartY);
+            updateImgTransform();
+        });
+        window.addEventListener('mouseup', function() {
+            isDragging = false;
+            viewport.classList.remove('dragging');
+        });
+
+        function lightboxNav(e, dir) {
+            e.stopPropagation();
+            lbIndex = (lbIndex + dir + lbImages.length) % lbImages.length;
+            var lbImg = document.getElementById('lightbox-img');
+            lbImg.onload = function() {
+                imgNatW = lbImg.naturalWidth;
+                imgNatH = lbImg.naturalHeight;
+                zoomReset();
+            };
+            lbImg.src = lbImages[lbIndex];
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+
+        // Close on background click (not on image or controls)
+        document.getElementById('lb-viewport').addEventListener('click', function(e) {
+            if (!isDragging && e.target !== document.getElementById('lightbox-img')) {
+                closeLightbox();
+            }
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (!document.getElementById('lightbox').classList.contains('active')) return;
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') lightboxNav(e, -1);
+            if (e.key === 'ArrowRight') lightboxNav(e, 1);
+            if (e.key === '+' || e.key === '=') zoomChange(1);
+            if (e.key === '-') zoomChange(-1);
+            if (e.key === '0') zoomReset();
+        });
+    </script>
+
+    <!-- Image & Video Protection -->
+    <script>
+        document.addEventListener('contextmenu', function(e) {
+            if (e.target.tagName === 'IMG' || e.target.tagName === 'VIDEO') {
+                e.preventDefault();
+            }
+        });
+        document.addEventListener('dragstart', function(e) {
+            if (e.target.tagName === 'IMG' || e.target.tagName === 'VIDEO') {
+                e.preventDefault();
+            }
+        });
+        document.querySelectorAll('img').forEach(function(img) {
+            img.style.userSelect = 'none';
+            img.style.webkitUserSelect = 'none';
+            img.setAttribute('draggable', 'false');
+        });
+        document.querySelectorAll('video').forEach(function(vid) {
+            vid.setAttribute('controlsList', 'nodownload');
+            vid.setAttribute('disablePictureInPicture', '');
+            vid.setAttribute('draggable', 'false');
+            vid.style.userSelect = 'none';
+            vid.style.webkitUserSelect = 'none';
+            vid.removeAttribute('controls');
+        });
+    </script>
+
+</body>
+</html>
